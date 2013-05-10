@@ -7,9 +7,11 @@ int num1;
 int num2;
 int num3;
 int num4;
-int number;
 int moveon=1;
 int lcd_key = 0;
+int lastBtn = 0;
+int currentBtn = 0;
+
 #define V1 80
 #define V2 230
 #define V3 350
@@ -23,22 +25,21 @@ void setup(){
 void loop(){
   lcd.setCursor(0,0);
   lcd.print("Enter Passcode");
-  
+
   if (moveon == 1){
-  Enter_Number();
-  num1 = number;
-  lcd.setCursor(0,1);
-  lcd.print(num1,DEC);
+    num1 = Enter_Number();
+    lcd.setCursor(0,1);
+    lcd.print(num1,DEC);
   }
-  
+
   if (moveon == 2){
-  Enter_Number();
-  num2 = number;
-  lcd.setCursor(1,1);
-  lcd.print(num2,DEC);
+    num2 = Enter_Number();
+    lcd.setCursor(1,1);
+    lcd.print(num2,DEC);
   }
-  
-  
-  delay(5);
-  
+
+  lcd.setCursor(15,0);
+  lcd.print(moveon);
+
 }
+
