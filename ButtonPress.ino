@@ -7,12 +7,11 @@ int buttonPin=A0;
 #define btnSELECT 4
 #define btnNONE 5
 
-
 int read_LCD_buttons()
 {
   int adcIn;
   adcIn = analogRead(buttonPin);
-  delay(200); 
+  delay(5); 
   if (adcIn < 50) return btnRIGHT;
   else if (adcIn < 195) return btnUP;
   else if (adcIn < 380) return btnDOWN;

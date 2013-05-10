@@ -1,79 +1,54 @@
-// Function that allows the user to pick a set temperature
+// Function that allows the user to pick a passcode
 int number=0;
+int lastBtn1 = 0;
+int lastBtn2 = 0;
+int lastBtn3 = 0;
 
 int Enter_Number()
 {
   lcd_key = read_LCD_buttons();
-  switch (lcd_key){
-  case btnUP:
+
+  if (lcd_key == btnSELECT && lastBtn1 != btnSELECT) //if SELECT button was pressed
   {
-    number = number + 1;
-    break;
+    moveon = moveon+1;
+    lastBtn1 = btnSELECT;  //change the last button to SELECT
   }
-  case btnDOWN:
+  else if (lcd_key != btnSELECT)
   {
-    number = number - 1;
-    break;
+    lastBtn1=0;            //reset last button to default
+  }
+  
+  if (lcd_key == btnUP && lastBtn2 != btnUP)
+  {
+    number = number+1;
+    lastBtn2 = btnUP;      //use a different "last button" variable to track the UP button
+    if (number >= 9)       //set the upper limit to 9 (0-9)
+    {
+      number = 9;
+    }
+  }
+  else if (lcd_key != btnUP)
+  {
+    lastBtn2=0;
   }
 
-  case btnSELECT:
+  if (lcd_key == btnDOWN && lastBtn3 != btnDOWN)
   {
-    moveon = moveon + 1;
-    break;
+    number = number-1;
+    lastBtn3 = btnDOWN;    //use a different "last button" variable to track the DOWN button
+    if (number <= 0)      //set the lower limit to 0 (0-9)
+    {
+      number = 0;
+    }   
   }
+  else if (lcd_key != btnDOWN)
+  {
+    lastBtn3=0;
   }
-
-  /*
-  if (lcd_key == btnSELECT){
-   if(lcd_key == btnSELECT && buttonLast3 != btnSELECT)
-   {
-   moveon = moveon+1;
-   }
-   }
-   else{
-   buttonLast3=0;
-   }
-   
-   if (lcd_key == btnUP){
-   if (lcd_key == btnUP && buttonLast1 != btnUP)
-   {
-   number = number+1;
-   if (number >= 9)
-   {
-   number = 9;
-   }
-   lcd.setCursor(0,1);
-   lcd.print(number);
-   buttonLast1 = btnUP;
-   }
-   }
-   else{
-   buttonLast1=0;
-   }
-   
-   if(lcd_key == btnDOWN){
-   if (lcd_key == btnDOWN && buttonLast2 != btnDOWN)
-   {
-   number = number-1;
-   if (number < 1)
-   {
-   number=0;
-   }
-   buttonLast2 = btnDOWN;
-   lcd.setCursor(0,1);
-   lcd.print(number);
-   }
-   }
-   else{
-   buttonLast2=0;
-   }
-   
-   lcd.setCursor(13,1);
-   lcd.print(moveon,DEC);
+  
    return number;
-   
-   */
 }
+
 
 
 
