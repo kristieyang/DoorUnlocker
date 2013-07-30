@@ -1,7 +1,8 @@
 #include <LiquidCrystal.h>
-//#include <SoftwareServo.h>
+#include <Servo.h>
 
 LiquidCrystal lcd(8,9,4,5,6,7);
+Servo myservo;
 
 //Hide the code with a smiley face
 byte h1[8] = {
@@ -27,6 +28,8 @@ int printlastbtn;
 void setup(){
   lcd.begin(16,2);
   lcd.createChar(0,h1);
+  myservo.attach(0);
+  myservo.write(90); //set servo to mid-point
 }
 
 void loop(){
@@ -68,10 +71,5 @@ void loop(){
     lcd.setCursor(3,1);
     lcd.write(byte(0));
   }
-  
-  lcd.setCursor(15,0);
-  lcd.print(moveon);
-  
-
 }
 
