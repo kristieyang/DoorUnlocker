@@ -35,6 +35,7 @@ int moveon=1;
 int lcd_key=0;
 int currentBtn=0;
 int printlastbtn;
+int servostatus;
 int lockstatus;
 int servodisp;
 
@@ -43,12 +44,13 @@ void setup(){
   lcd.createChar(0,h1);
   //lcd.createChar(0,h2);
   myservo.attach(10);
+  myservo.writeMicroseconds(1500); //start servo in the center position
 }
 
 void loop(){
   lcd.setCursor(0,0);
   lcd.print("Enter Passcode");
-
+  servostatus = 1;                //Servo does nothing
   if (moveon == 1){              //select first digit of passcode
     num1 = Enter_Number();
     lcd.setCursor(0,1);
@@ -80,23 +82,23 @@ void loop(){
     lcd.print(num4,DEC);
   }
   
-  if (moveon == 5){          //Add servo functionality here
+  if (moveon == 5){           
     lcd.setCursor(3,1);
     lcd.write(byte(0));
-    if (num1==1 & num2==1 & num3==1 & num4==1){
-      lockstatus = ServoFun();
-      servodisp = 5;
-      lcd.setCursor(13,1);
-      lcd.print(servodisp);
+    if (num1==1 & num2==1 & num3==1 & num4==1){  //Turn the servo if the correct passcode has been entered
+      servostatus=2;                             //Unlock the door
+      lockstatus = ServoFun(servostatus);        //passes servostatus variable to function, which will rotate servo to new position
     }
     else{
      lcd.setCursor(6,1);
      //lcd.print(byte(1));
-     servodisp = 0;
-     lcd.setCursor(13,1);
-     lcd.print(servodisp);
+     servostatus=1;                             //servo does nothing    
+     lockstatus = ServoFun(servostatus);     
      }    
-    //Servofun(lockstatus
   }
+ // if (moveon == 6){
+//    servostatus=3;
+ //   lockstatus = ServoFun(servostatus);
+//  }
 }
 
