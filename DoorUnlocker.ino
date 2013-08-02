@@ -15,6 +15,17 @@ byte h1[8] = {
   B00000,
 };
 
+/*
+byte h2[8] = {
+  B00000,
+  B10001,
+  B00000,
+  B00000,
+  B01110,
+  B10001,
+  B00000,
+};
+*/
 
 int num1;
 int num2;
@@ -24,12 +35,14 @@ int moveon=1;
 int lcd_key=0;
 int currentBtn=0;
 int printlastbtn;
+int lockstatus;
+int servodisp;
 
 void setup(){
   lcd.begin(16,2);
   lcd.createChar(0,h1);
-  myservo.attach(0);
-  myservo.write(90); //set servo to mid-point
+  //lcd.createChar(0,h2);
+  myservo.attach(10);
 }
 
 void loop(){
@@ -70,6 +83,20 @@ void loop(){
   if (moveon == 5){          //Add servo functionality here
     lcd.setCursor(3,1);
     lcd.write(byte(0));
+    if (num1==1 & num2==1 & num3==1 & num4==1){
+      lockstatus = ServoFun();
+      servodisp = 5;
+      lcd.setCursor(13,1);
+      lcd.print(servodisp);
+    }
+    else{
+     lcd.setCursor(6,1);
+     //lcd.print(byte(1));
+     servodisp = 0;
+     lcd.setCursor(13,1);
+     lcd.print(servodisp);
+     }    
+    //Servofun(lockstatus
   }
 }
 

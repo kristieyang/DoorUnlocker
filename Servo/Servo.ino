@@ -8,13 +8,13 @@ void setup(){
 }
 
 void loop(){
+  myservo.writeMicroseconds(2600);
+  delay(1000);
+  
   myservo.writeMicroseconds(1500);
   delay(1000);
   
-  myservo.writeMicroseconds(1000);
-  delay(1000);
-  
-  myservo.writeMicroseconds(2000);
+  myservo.writeMicroseconds(600);
   delay(1000);
   
   //standard servo shaft
