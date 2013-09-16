@@ -87,7 +87,7 @@ void loop(){
     moveon = moveon+1;
   }
   if (moveon == 6){
-    if (num1==1 & num2==2 & num3==3 & num4==4){  //Turn the servo if the correct passcode has been entered
+    if (num1==0 & num2==6 & num3==0 & num4==5){  //Turn the servo if the correct passcode has been entered
       servostatus=2;                             //Unlock the door
       lockstatus = ServoFun(servostatus);        //passes servostatus variable to function, which will rotate servo to new position
     }
